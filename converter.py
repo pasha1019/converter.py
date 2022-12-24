@@ -8,7 +8,7 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 
 # Работа с токеном бота
-TOKEN = "5909796694:AAHqK0zVk9-Jl9I_WRuXRNCkejtMTIDukrQ"
+TOKEN = "*"
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
