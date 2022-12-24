@@ -1,7 +1,6 @@
 import requests
 import date_curs
 
-# t.me/valute_test_user_bot
 
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
