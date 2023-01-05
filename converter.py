@@ -1,5 +1,6 @@
 import requests
 import date_curs
+import markups as mks
 
 
 from aiogram import Bot, types
@@ -7,7 +8,7 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 
 # Работа с токеном бота
-TOKEN = "*"
+TOKEN = "5909796694:AAHqK0zVk9-Jl9I_WRuXRNCkejtMTIDukrQ"
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
@@ -17,21 +18,31 @@ usd_curs = data['Valute']['USD']['Value']
 eur_curs = data['Valute']['EUR']['Value']
 
 
-# Обработка команд start
+# Обработка команды start
 @dp.message_handler(commands=['start'])
 async def send_welcome(msg: types.Message):
-    await msg.answer(date_curs.answer + '\n' + 'Евро = ' + str(eur_curs) + '\n' + 'Доллар = ' + str(usd_curs))
+    await bot.send_message(msg.from_user.id, 'Привет!\n', reply_markup=mks.main_menu)
+
 
 
 # Обработка команд входящих сообщений
-@dp.message_handler(content_types=['text'])
-async def get_text_messages(msg: types.Message):
-    if msg.text.lower() == 'привет':
-        await msg.answer('Привет!')
-    elif msg.text.lower() == "помоги":
-        await msg.answer('Чем помочь?')
+@dp.message_handler()
+async def bot_messages(msg: types.Message):
+    # Проверка команд главного меню
+    if msg.text == 'Курс валют на сегодня':
+        await bot.send_message(msg.from_user.id, f'{date_curs.answer}\nЕвро = {str(eur_curs)}\nДоллар = {str(usd_curs)}')
+    elif msg.text == 'Конвертер валют':
+        await bot.send_message(msg.from_user.id, 'Выберите валюту для конвертации.\n', reply_markup=mks.convert_menu)
+    elif msg.text == 'Информация':
+        pass
     else:
-        await msg.answer('Не понимаю, что это значит.')
+        await bot.send_message(msg.from_user.id, 'Я Вас не понимаю!')
+
+
+# Обработка команды help
+@dp.message_handler(commands=['help'])
+async def help_handler(message: types.Message):
+    pass
 
 
 # Накопление сообщений
