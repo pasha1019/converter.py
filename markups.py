@@ -10,7 +10,8 @@ main_menu = ReplyKeyboardMarkup(resize_keyboard=True).add(button_1, button_2, bu
 
 
 # Меню конвертации
-button_USD = KeyboardButton('Доллар')
-button_EUR = KeyboardButton('Евро')
-button_RUB = KeyboardButton('Рубль')
+button_USD = KeyboardButton(''
+                            '')
+button_EUR = KeyboardButton('Конвертировать рубли в евро')
+button_RUB = KeyboardButton('Конвертировать рубли в доллары')
 convert_menu = ReplyKeyboardMarkup(resize_keyboard=True).add(button_USD,button_RUB,button_EUR)
